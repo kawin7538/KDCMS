@@ -31,46 +31,10 @@
                 <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">...</div>
                 <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">...</div>
                 <div class="tab-pane fade" id="song" role="tabpanel" aria-labelledby="song-tab">
-                    <div class="container">
-                        <table class="table">
-                            {% for s in song %}
-                            <tr>
-                                <td>{{forloop.counter}}</td>
-                                {%if s.song_ytlink != None %}
-                                    <!-- <td><iframe src="https://www.youtube.com/embed/{{s.song_ytlink}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td> -->
-                                    <td><button value="{{s.song_ytlink}}" class="btn" id="yt_button{{forloop.counter}}" data-toggle="modal" data-target="#videoModal"><i class="fas fa-play-circle"></i></button></td>
-                                {%else%}
-                                    <!-- <td><button class="btn" disabled="disabled"><i class="fas fa-ban"></i></button></td> -->
-                                    <td></td>
-                                {%endif%}
-                                <td>{{s.song_name}}</td>
-                                {%if s.song_artist != None %}
-                                    <td>{{s.song_artist}}</td>
-                                {%else%}
-                                    <td></td>
-                                {%endif%}
-                            </tr>
-                            {%endfor%}
-                        </table>
-                    </div>
+                    {% include 'songs/_song.html' %}
                 </div>
             </div>
         </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div id="yt_video"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </body>
 </html>
