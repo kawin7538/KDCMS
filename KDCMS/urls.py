@@ -21,5 +21,4 @@ from songs import views as song_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',song_view.index,name='index'),
-    path('songs',song_view.song_index,name='songs')
 ]

@@ -9,14 +9,22 @@ from dbHelper import db
 
 # Create your views here.
 def index(request):
-    response = redirect('/songs')
-    return response
-
-def song_index(request):
-    song_ref=db.collection('song')
-    docs=song_ref.stream()
     data=dict()
+    data['song']=get_song()
+    # print(data)
+    return render(request,'index.html',data)
+
+def get_song():
+    song_ref=db.collection('song').order_by('song_name')
+    docs=song_ref.stream()
+    ans=[]
     for doc in docs:
-        data[doc.id]=doc.to_dict()
+        temp=doc.to_dict()
+        if temp['song_ytlink']!=None:
+            temp['song_ytlink']=temp['song_ytlink'].split('/')[-1]
+            temp['song_ytlink']=temp['song_ytlink'][8:]
+        # print(temp)
+        ans.append(temp)
+    return ans
     # return JsonResponse(data)
-    return render(request,'songs/index.html',data)
+    # return render(request,'index.html',data)
