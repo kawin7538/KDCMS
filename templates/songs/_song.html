@@ -35,10 +35,11 @@
     </div>
 </div>
 
+<!-- Song Form -->
 <div class="modal fade" id="songFormModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-                <form id="songForm" method="post" class="was-validated">
+                <!-- <form id="songForm" method="post" class="was-validated">  -->
                 <div class="modal-header">
                     <h5 class="modal-title">Song Form</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -46,37 +47,39 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <form id="songForm" method="post"> 
+                        {% csrf_token %}
                     <div class="form-group row">
                         <label for="song_id" class="col-lg-3 col-form-label">Song ID</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="song_id" placeholder="Song ID Here" readonly>
+                            <input type="text" name="song_id" class="form-control" id="song_id" placeholder="Song ID Here" readonly>
                         </div>
                         <div class="invalid-feedback">Example invalid feedback text</div>
                     </div>
                     <div class="form-group row">
                         <label for="song_name" class="col-lg-3 col-form-label">Song Name</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="song_name" placeholder="Song Name Here" required>
+                            <input type="text" name="song_name" class="form-control" id="song_name" placeholder="Song Name Here" required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="song_artist" class="col-lg-3 col-form-label">Artist</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="song_artist" placeholder="Song Artist Here">
+                            <input type="text" name="song_artist" class="form-control" id="song_artist" placeholder="Song Artist Here">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="song_ytlink" class="col-lg-3 col-form-label">Youtube Link</label>
                         <div class="col-lg-9">
-                            <input type="text" class="form-control" id="song_ytlink" placeholder="youtube.com/XXXXXX">
+                            <input type="text" name="song_ytlink" class="form-control" id="song_ytlink" placeholder="youtube.com/XXXXXX">
                         </div>
                     </div>
+                </form>
                 </div>
                 <div class="modal-footer">
                     <button id="songFormSubmit" class="btn btn-primary">Save</button>
                     <button id="songFormReset" class="btn btn-secondary">Reset</button>
                 </div>
-            </form>
         </div>
     </div>
 </div>

@@ -3,9 +3,11 @@ from django.http import HttpResponse
 
 from django.shortcuts import get_object_or_404
 from django.views.generic import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from django.http import JsonResponse
 
-from dbHelper import db
+from dbHelper import firestore,db,song_ref
 
 # Create your views here.
 def index(request):
@@ -43,4 +45,31 @@ class song_list(View):
             # print(temp)
             song.append(temp)
         data['songs']=song
+        return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class song_create(View):
+    def post(self,request):
+        data=dict()
+        request.POST=request.POST.copy()
+        # if Receipt.objects.count() != 0:
+        #     receipt_no_max = Receipt.objects.aggregate(Max('receipt_no'))['receipt_no__max']
+        #     next_receipt_no = receipt_no_max[0:3] + str(int(receipt_no_max[3:7])+1) + "/" + receipt_no_max[8:10]
+        # else:
+        #     next_receipt_no = "RCT1000/19"
+        query=song_ref.order_by('song_id',direction=firestore.Query.DESCENDING).limit(1)
+        max_num=[i.to_dict() for i in query.stream()][0]['song_id']
+        request.POST['song_id']=(max_num+1)
+        data=request.POST
+        del data['csrfmiddlewaretoken']
+        for key in data:
+            if data[key]=='':
+                data[key]=None
+            # print(data[key])
+        print(data)
+        try:
+            song_ref.add(data)
+        except:
+            data['error'] = 'form not valid!'
+
         return JsonResponse(data)

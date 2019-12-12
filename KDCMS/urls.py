@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',song_view.index,name='index'),
     path('song/list',song_view.song_list.as_view(),name='song_list'),
+    path('song/create',song_view.song_create.as_view(),name='song_create'),
 ]
