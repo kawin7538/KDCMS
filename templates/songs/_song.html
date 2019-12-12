@@ -16,25 +16,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for s in song %}
-                <tr>
-                    <td style="display:none">{{s.song_id}}</td>
-                    <td>{{forloop.counter}}</td>
-                    {%if s.song_ytlink != None %}
-                        <!-- <td><iframe src="https://www.youtube.com/embed/{{s.song_ytlink}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td> -->
-                        <td><button value="{{s.song_ytlink}}" class="btn" id="yt_button{{forloop.counter}}" data-toggle="modal" data-target="#videoModal"><i class="fas fa-play-circle"></i></button></td>
-                    {%else%}
-                        <!-- <td><button class="btn" disabled="disabled"><i class="fas fa-ban"></i></button></td> -->
-                        <td></td>
-                    {%endif%}
-                    <td>{{s.song_name}}</td>
-                    {%if s.song_artist != None %}
-                        <td>{{s.song_artist}}</td>
-                    {%else%}
-                        <td></td>
-                    {%endif%}
-                </tr>
-            {%endfor%}
+            
         </tbody>
     </table>
 </div>
