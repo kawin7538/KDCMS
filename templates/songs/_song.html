@@ -1,46 +1,56 @@
-    <div class="container">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col"></th>
-                    <th scope="col">Song Name</th>
-                    <th scope="col">Artist</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for s in song %}
-                    <tr>
-                        <td>{{forloop.counter}}</td>
-                        {%if s.song_ytlink != None %}
-                            <!-- <td><iframe src="https://www.youtube.com/embed/{{s.song_ytlink}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td> -->
-                            <td><button value="{{s.song_ytlink}}" class="btn" id="yt_button{{forloop.counter}}" data-toggle="modal" data-target="#videoModal"><i class="fas fa-play-circle"></i></button></td>
-                        {%else%}
-                            <!-- <td><button class="btn" disabled="disabled"><i class="fas fa-ban"></i></button></td> -->
-                            <td></td>
-                        {%endif%}
-                        <td>{{s.song_name}}</td>
-                        {%if s.song_artist != None %}
-                            <td>{{s.song_artist}}</td>
-                        {%else%}
-                            <td></td>
-                        {%endif%}
-                    </tr>
-                {%endfor%}
-            </tbody>
-        </table>
+<script src="{% static 'js/song.js' %}"></script>
+
+<div class="container">
+    <br>
+    <div class="row">
+        <!-- <button class="btn btn-primary">Add</button> -->
+        <div class="col-lg-10">Song Part</div>
+        <div class="col-lg-2"><button class="btn btn-primary btn-block"><i class="fas fa-plus"></i> Add Song</button></div>
     </div>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Song Name</th>
+                <th scope="col">Artist</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in song %}
+                <tr>
+                    <td style="display:none">{{s.song_id}}</td>
+                    <td>{{forloop.counter}}</td>
+                    {%if s.song_ytlink != None %}
+                        <!-- <td><iframe src="https://www.youtube.com/embed/{{s.song_ytlink}}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></td> -->
+                        <td><button value="{{s.song_ytlink}}" class="btn" id="yt_button{{forloop.counter}}" data-toggle="modal" data-target="#videoModal"><i class="fas fa-play-circle"></i></button></td>
+                    {%else%}
+                        <!-- <td><button class="btn" disabled="disabled"><i class="fas fa-ban"></i></button></td> -->
+                        <td></td>
+                    {%endif%}
+                    <td>{{s.song_name}}</td>
+                    {%if s.song_artist != None %}
+                        <td>{{s.song_artist}}</td>
+                    {%else%}
+                        <td></td>
+                    {%endif%}
+                </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 
 <!-- Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <div class="embed-responsive embed-responsive-16by9" id="yt_frame"></div>
-                </div>
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="embed-responsive embed-responsive-16by9" id="yt_frame"></div>
             </div>
         </div>
     </div>
+</div>
