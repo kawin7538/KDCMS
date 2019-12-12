@@ -7,3 +7,5 @@ cred = credentials.Certificate('kdcms-4cb95-firebase-adminsdk-m8vz5-825e85eea2.j
 firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+
+song_ref=db.collection('song')

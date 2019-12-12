@@ -2,7 +2,7 @@
     <br>
     <div class="row">
         <!-- <button class="btn btn-primary">Add</button> -->
-        <div class="col-lg-10">Song Part</div>
+        <div class="col-lg-10"><h5>Song Part</h5></div>
         <div class="col-lg-2"><button id="add_song" class="btn btn-primary btn-block" data-toggle="modal" data-target="#songFormModal"><i class="fas fa-plus"></i> Add Song</button></div>
     </div>
     <br>
@@ -35,17 +35,24 @@
     </div>
 </div>
 
-<div class="modal fade" id="songFormModal" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal fade" id="songFormModal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Song Form</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
+                <form id="songForm" method="post" class="was-validated">
+                <div class="modal-header">
+                    <h5 class="modal-title">Song Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="song_id" class="col-lg-3 col-form-label">Song ID</label>
+                        <div class="col-lg-9">
+                            <input type="text" class="form-control" id="song_id" placeholder="Song ID Here" readonly>
+                        </div>
+                        <div class="invalid-feedback">Example invalid feedback text</div>
+                    </div>
                     <div class="form-group row">
                         <label for="song_name" class="col-lg-3 col-form-label">Song Name</label>
                         <div class="col-lg-9">
@@ -64,8 +71,12 @@
                             <input type="text" class="form-control" id="song_ytlink" placeholder="youtube.com/XXXXXX">
                         </div>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="songFormSubmit" class="btn btn-primary">Save</button>
+                    <button id="songFormReset" class="btn btn-secondary">Reset</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

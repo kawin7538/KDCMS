@@ -45,4 +45,16 @@ $(document).on('click','button[id^=yt_button]',function(){
 $(document).on('hide.bs.modal',"#videoModal",function(){
     console.log($videoSrc);
     $("#yt_video").attr('src',$videoSrc); 
-})
+});
+
+$(document).on('click',"#add_song",function(){
+    $("#song_id").val("<new>");
+});
+
+$(document).on('click','#songFormReset',function(){
+    $("#songForm").trigger('reset');
+});
+
+$(document).on('click',"#songFormSubmit",function(){
+    
+});
