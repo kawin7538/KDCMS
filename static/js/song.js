@@ -19,7 +19,35 @@ $(document).on('hide.bs.modal',"#videoModal",function(){
 
 $(document).on('click',"#add_song",function(){
     $("#song_id").val("<new>");
+    $("#songForm input[id!=song_id]").val('');
 });
+
+$(document).on('click',"button[id^=song_delete]",function(){
+    // $("#deleteSongModal").find("#deleteDetail").text("FAS");
+    var modal=$("#deleteSongModal");
+    var row=$(this).closest("tr");
+    var html="";
+    html+="<div class=\"row\"><div class=\"col-4\">song id</div><div class=\"col\">"+row.find("#id").text()+"</div></div>";
+    html+="<div class=\"row\"><div class=\"col-4\">song name</div><div class=\"col\">"+row.find("a[id^=song_detail]").text()+"</div></div>";
+    html+="<div class=\"row\"><div class=\"col-4\">song artist</div><div class=\"col\">"+row.find("#artist").text()+"</div></div>";
+    modal.find("#deleteDetail").html(html);
+    modal.find("#deleteSongButton").val(row.find("#id").text());
+});
+
+$(document).on('click',"#deleteSongButton",function(){
+    var token = $('[name=csrfmiddlewaretoken]').val();
+    $.ajax({
+        url: 'song/delete/'+$("#deleteSongButton").val(),
+        type: 'post',
+        headers: {'X-CSRFToken':token},
+        dataType: 'json',
+        success: function(data){
+            alert('ลบสำเร็จ');
+            $("#deleteSongModal").modal('hide');
+            listSong();
+        }
+    });
+})
 
 $(document).on('click','a[id^=song_detail]',function(){
     var $row=$(this).closest("tr");
@@ -131,8 +159,9 @@ function listSong(){
                     row += `<td><span id="artist">${s.song_artist}</span></td>`;
                 }
                 else{
-                    row += `<td></td>`;
+                    row += `<td><span id="artist"></span></td>`;
                 }
+                row += `<td><button id="song_delete${i}" class="btn btn-danger" data-toggle="modal" data-target="#deleteSongModal"><i class="fas fa-trash-alt"></i></button</td>`;
                 row += `</tr>`;
                 i++;
             });

@@ -74,15 +74,8 @@ class song_update(View):
     def post(self,request):
         data=dict()
         request.POST=request.POST.copy()
-        # if Receipt.objects.count() != 0:
-        #     receipt_no_max = Receipt.objects.aggregate(Max('receipt_no'))['receipt_no__max']
-        #     next_receipt_no = receipt_no_max[0:3] + str(int(receipt_no_max[3:7])+1) + "/" + receipt_no_max[8:10]
-        # else:
-        #     next_receipt_no = "RCT1000/19"
-        # query=song_ref.order_by('song_id',direction=firestore.Query.DESCENDING).limit(1)
-        # max_num=[i.to_dict() for i in query.stream()][0]['song_id']
-        # request.POST['song_id']=(max_num+1)
         data=request.POST
+        data['song_id']=int(data['song_id'])
         del data['csrfmiddlewaretoken']
         for key in data:
             if data[key]=='':
@@ -99,4 +92,19 @@ class song_update(View):
             print(e)
             # print(help(query))
 
+        return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class song_delete(View):
+    def post(self,request,pk):
+        data=dict()
+        song_id=int(pk)
+        try:
+            docs=song_ref.where('song_id','==',song_id).stream()
+            for doc in docs:
+                print(doc.id)
+                doc.reference.delete()
+            data['message']='Song Deleted'
+        except:
+            data['message']='Error !'
         return JsonResponse(data)

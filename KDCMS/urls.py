@@ -24,4 +24,5 @@ urlpatterns = [
     path('song/list',song_view.song_list.as_view(),name='song_list'),
     path('song/create',song_view.song_create.as_view(),name='song_create'),
     path('song/update',song_view.song_update.as_view(),name='song_update'),
+    path('song/delete/<pk>',song_view.song_delete.as_view(),name='song_delete'),
 ]

@@ -13,6 +13,7 @@
                 <th scope="col"></th>
                 <th scope="col">Song Name</th>
                 <th scope="col">Artist</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
@@ -80,6 +81,30 @@
                     <button id="songFormSubmit" class="btn btn-primary">Save</button>
                     <button id="songFormReset" class="btn btn-secondary">Reset</button>
                 </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deleteSongModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Do you want to delete ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="deleteDetail"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="deleteSongButton" type="button" class="btn btn-light">
+                    <i>Delete it</i>
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    Cancel
+                </button>
+            </div>
         </div>
     </div>
 </div>
