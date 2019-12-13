@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  }
+  th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <title>Home page</title
+
+<body>
+<table style="width:100%" border="1" >
+        <tr>
+        <th>
+ Event Form
+ </th>
+        </tr>
+  <tr>
+    <td> 
+        <div>
+            <label for="event_name">Event Name:</label>
+            <input type="text" id="event_name" name="event_name">
+        </div>
+        </td>
+    </tr>
+    <tr>
+    <td>
+    <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location">
+        </div>
+         </td> 
+        
+        <tr>
+        <td>
+        <div>
+            <label for="date_time">Date/Time:</label>
+            <input type="text" id="date_time" name="date_time">
+        </div>
+        </td>
+   <tr>
+        <td>
+        <table>
+        
+        <td>
+        <div>
+            <label for="Type">Type:</label>
+            <input type="text" id="Type" name="Type">
+        </div>
+        </td>
+        
+        
+        <td>
+         
+        <div>
+            <label for="Song">Song:</label>
+            <input type="text" id="Song" name="Song">
+        </div>
+        </td>
+        
+        
+        <td>
+        <div>
+            <label for="Member">Member:</label>
+            <input type="text" id="Member" name="Member">
+             </div>
+            </td>
+            </tr>
+            
+            </table>
+     
+        <tr>
+        <th>
+        <center>
+        <button type="submit">Submit</button>
+        </th>
+        </tr>
+       </table>
