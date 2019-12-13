@@ -30,8 +30,12 @@
                 </li>
             </ul>
             <div class="tab-content" id="headerTabContent">
-                <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">...</div>
-                <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">...</div>
+                <div class="tab-pane fade show active" id="event" role="tabpanel" aria-labelledby="event-tab">
+                    {% include 'events/_event.html' %}
+                </div>
+                <div class="tab-pane fade" id="member" role="tabpanel" aria-labelledby="member-tab">
+                    {% include 'members/_member.html' %}
+                </div>
                 <div class="tab-pane fade" id="song" role="tabpanel" aria-labelledby="song-tab">
                     {% include 'songs/_song.html' %}
                 </div>
