@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from songs import views as song_view
+from members import views as member_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,5 @@ urlpatterns = [
     path('song/create',song_view.song_create.as_view(),name='song_create'),
     path('song/update',song_view.song_update.as_view(),name='song_update'),
     path('song/delete/<pk>',song_view.song_delete.as_view(),name='song_delete'),
+    path('member/list',member_view.member_list.as_view(),name='member_list'),
 ]

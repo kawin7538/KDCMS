@@ -44,6 +44,7 @@ class song_list(View):
                 temp['song_ytlink']=temp['song_ytlink'][8:]
             # print(temp)
             song.append(temp)
+        print("{} song loaded".format(len(song)))
         data['songs']=song
         return JsonResponse(data)
 

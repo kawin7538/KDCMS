@@ -9,3 +9,5 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 song_ref=db.collection('song')
+
+member_ref=db.collection('member')
