@@ -11,3 +11,5 @@ db = firestore.client()
 song_ref=db.collection('song')
 
 member_ref=db.collection('member')
+
+evaluate_score_ref=db.collection('evaluate_score')

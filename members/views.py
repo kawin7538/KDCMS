@@ -13,6 +13,7 @@ from dbHelper import firestore,db,member_ref
 class member_list(View):
     def get(self,request):
         member_ref=db.collection('member').order_by('nickname')
+        evaluate_score_ref
         docs=member_ref.stream()
         member=[]
         data=dict()
