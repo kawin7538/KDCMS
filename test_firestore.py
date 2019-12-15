@@ -103,4 +103,4 @@ def main():
     print("[STOP] Deleting complete,",time.time()-temp_time)
 
 if __name__ == "__main__":
-    main()
+    # main()

@@ -1,9 +1,16 @@
+<style>
+    .modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+</style>
+
 <div class="container">
     <br>
     <div class="row">
         <!-- <button class="btn btn-primary">Add</button> -->
         <div class="col-lg-10"><h5>Member Part</h5></div>
-        <div class="col-lg-2"><a href="#" id="add_member" class="btn btn-primary btn-block"><i class="fas fa-plus"></i> Add Member</a></div>
+        <div class="col-lg-2"><a href="member/new" id="add_member" class="btn btn-primary btn-block"><i class="fas fa-plus"></i> Add Member</a></div>
     </div>
     <br>
     <div class="row">
@@ -38,6 +45,86 @@
                     
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!--Member Detail Modal-->
+<div class="modal fade" id="memberDetailModal" tabindex="-1" role="dialog" aria-labelledby="memberDetailModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="memberDetailModalLabel">Member Detail</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="name_surname" class="col-md-4 col-form-label">Name-Surname</label>
+                    <div class="col-md-8">
+                        <input type="text" name="name_surname" class="form-control" id="name_surname_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="sid" class="col-md-4 col-form-label">Student ID</label>
+                    <div class="col-md-8">
+                        <input type="text" name="sid" class="form-control" id="sid_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="faculty" class="col-md-4 col-form-label">Faculty</label>
+                    <div class="col-md-8">
+                        <input type="text" name="faculty" class="form-control" id="faculty_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="department" class="col-md-4 col-form-label">Department</label>
+                    <div class="col-md-8">
+                        <input type="text" name="department" class="form-control" id="department_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tel" class="col-md-4 col-form-label">Tel</label>
+                    <div class="col-md-8">
+                        <input type="text" name="tel" class="form-control" id="tel_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fb" class="col-md-4 col-form-label">facebook</label>
+                    <div class="col-md-8">
+                        <input type="text" name="fb" class="form-control" id="fb_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="line" class="col-md-4 col-form-label">Line</label>
+                    <div class="col-md-8">
+                        <input type="text" name="line" class="form-control" id="line_id" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-md-4 col-form-label">Email</label>
+                    <div class="col-md-8">
+                        <input type="text" name="email" class="form-control" id="email_id" readonly>
+                    </div>
+                </div>
+                <h4>Dance History</h4>
+                <table class="table" id="dance_history">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Event Name</th>
+                            <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-primary" id="edit_profile_btn">Edit Profile</a>
+            </div>
         </div>
     </div>
 </div>
