@@ -61,9 +61,31 @@ function listMember(){
         }
     });
 }
+
+$(document).on('click',"#add_member",function(){
+    $("#member_id").val("<new>");
+    $("#memberForm input[id!=member_id]").val('');
+});
+
 $(document).on('click','memberFormReset',function(){
     $("#memberForm input[id!=member_id]").val('');
 });
+
+$(document).on('click','a[id^=member_detail]',function(){
+    var $row=$(this).closest("tr");
+    // var $member_id=$row.find("#id").text();
+    // console.log($member_id);
+    $("#member_id"ุ).val($row.find("#id").text());
+    $("#name_surname_id").val($(this).text());
+    $("#sid_id").val($row.find("#student_id").text());
+    $("#faculry_id").val($row.find("#faculty_id").text());
+    $("#department_id").val($row.find("#department_id").text());
+    $("#tel_id").val($row.find("#tel").text());
+    $("#fb_id").val($row.find("#line").text());
+    $("#line_id").val($row.find("#facebook").text());
+    $("#email_id").val($row.find("#email").text());
+    }
+);
 
 $(document).on('click',"#memberFormSubmit",function(e){
     var nickname = $('#nickname').val().trim();
@@ -85,15 +107,62 @@ $(document).on('click',"#memberFormSubmit",function(e){
             $('#lastname').focus();
             return false;
             }
-    var studentid = $('#studentid').val().trim();
-        if (studentid == '') {
+    var studentid = $('#sid_id').val().trim();
+        if (student_id == '') {
             alert('กรุณาระบุ studentID');
-            $('#studentid').focus();
+            $('#student_id').focus();
             return false;
             }
+            if($('#member_id').val() == '<new>'){
+                var token = $('[name=csrfmiddlewaretoken]').val();
+                var $form=$('#memberForm');
+                var $formData = $form.serialize();
+                console.log($formData);
+                $.ajax({
+                    url:  '/member/create',
+                    type:  'post',
+                    data: $form.serialize(),
+                    headers: { "X-CSRFToken": token },
+                    dataType:  'json',
+                    success: function  (data) {
+                        if (data.error) {
+                            console.log(data);
+                            alert(data.error);
+                        } else {
+                            console.log(data);
+                            alert('บันทึกสำเร็จ');
+                            $("#memberForm input[id!=member_id]").val('');
+                            listMember();
+                        }                    
+                    },
+                });  
+            }
+            else{
+                var token = $('[name=csrfmiddlewaretoken]').val();
+                var $form=$('#memberForm');
+                var $formData = $form.serialize();
+                console.log($formData);
+                $.ajax({
+                    url:  '/member/update',
+                    type:  'post',
+                    data: $form.serialize(),
+                    headers: { "X-CSRFToken": token },
+                    dataType:  'json',
+                    success: function  (data) {
+                        if (data.error) {
+                            console.log(data);
+                            alert(data.error);
+                        } else {
+                            console.log(data);
+                            alert('บันทึกสำเร็จ');
+                            $("#memberForm input[id!=member_id]").val('');
+                            listMember();
+                        }                    
+                    },
+                });
+            }
+    
+})
 
 
-            
-
-    })
     
