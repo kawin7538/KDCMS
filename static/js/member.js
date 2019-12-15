@@ -61,43 +61,6 @@ function listMember(){
         }
     });
 }
-
-function saveData() {
-    var nickname= document.getElementById('nickname');
-    var firstname= document.getElementById('firstname');
-    var lastname= document.getElementById('lastname');
-    var studentid= document.getElementById('studentid');
-    var faculty;
-    var image;
-    var tel= document.getElementById('phonenumber');
-    var facebook= document.getElementById('facebook');
-    var line= document.getElementById('line');
-    var email= document.getElementById('email');
-    insertData(nickname.value,firstname.value,lastname.value,studentid.value,
-        phonenumber.value,facebook.value,line.value,email.value)
-
-}
-
-function insertData(nickname,firstname,lastname,studentid,
-    phonenumber,facebook,line,email)
-    var firebaseref=firebase.database().ref("users");
-    firebaseRef.push({
-        nickname:nickname,
-        firstname:firstname,
-        lastname:lastname,
-        studentid=studentid,
-        phonenumber=phonenumber,
-        facebook=facebook,
-        line=line,
-        email=email,
-    });
-    console.log("Insert Success");
-
-session_start();
-mysql_connect("localhost","root","root");
-mysql_select_db("mydatabase");
-
-
 $(document).on('click','memberFormReset',function(){
     $("#memberForm input[id!=member_id]").val('');
 });
@@ -129,10 +92,7 @@ $(document).on('click',"#memberFormSubmit",function(e){
             return false;
             }
 
-$(document).on('click',"#upload",function(){
-$("#member_id").val("<new>");
-$("#memberForm input[id!=member_id]").val('');
-});
+
             
 
     })
