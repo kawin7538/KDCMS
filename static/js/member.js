@@ -75,7 +75,7 @@ $(document).on('click','a[id^=member_detail]',function(){
     var $row=$(this).closest("tr");
     // var $member_id=$row.find("#id").text();
     // console.log($member_id);
-    $("#member_id"ุ).val($row.find("#id").text());
+    $("#member_id").val($row.find("#id").text());
     $("#name_surname_id").val($(this).text());
     $("#sid_id").val($row.find("#student_id").text());
     $("#faculry_id").val($row.find("#faculty_id").text());
