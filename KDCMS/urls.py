@@ -27,4 +27,5 @@ urlpatterns = [
     path('song/update',song_view.song_update.as_view(),name='song_update'),
     path('song/delete/<pk>',song_view.song_delete.as_view(),name='song_delete'),
     path('member/list',member_view.member_list.as_view(),name='member_list'),
+    path('member/<pk>',member_view.index,name='member'),
 ]

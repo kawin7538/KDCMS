@@ -15,9 +15,9 @@ function listMember(){
                 row += `<tr>`;
                 row += `<td id="id" style="display: none">${s.member_id}</td>`;
                 // row += `<td>${i}</td>`;
-                row += `<td>${s.nickname}</td>`
+                row += `<td><a href="member/${s.member_id}">${s.nickname}</a></td>`
                 row += `<td>${s.name}</td>`;
-                row += `<td></td>`;
+                row += `<td>${(s.sum_rehearsal/s.count_rehearsal*100).toFixed(2)}</td>`;
                 row += `</tr>`;
                 i++;
             });

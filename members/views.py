@@ -10,10 +10,13 @@ from django.http import JsonResponse
 from dbHelper import firestore,db,member_ref
 
 # Create your views here.
+
+def index(request,pk):
+    return render(request,'members/member_form.html')
+
 class member_list(View):
     def get(self,request):
         member_ref=db.collection('member').order_by('nickname')
-        evaluate_score_ref
         docs=member_ref.stream()
         member=[]
         data=dict()

@@ -4,6 +4,10 @@ import pandas as pd
 
 import time
 
+import datetime
+
+from google.cloud.firestore_v1 import ArrayUnion
+
 # df=pd.read_csv("Data/song.csv")
 
 # print(df.to_dict('record'))
@@ -61,6 +65,36 @@ def edit_member():
     print(temp)
     print(member_df.head())
     member_df.to_csv("Data/member_Agg.csv",index=False)
+
+# def edit_event_line_item():
+#     event_df=pd.read_csv("Data/event.csv")
+#     event_line_item_df=pd.read_csv("Data/event_line_item.csv")
+#     evaluate_main_df=pd.read_csv("Data/evaluate_main.csv")
+#     evaluate_score_df=pd.read_csv("Data/evaluate_score.csv")
+#     for index, row in event_df.iterrows():
+#         # print(row[['event_id','date_time']])
+#         temp=evaluate_main_df[evaluate_main_df['event_id']==row['event_id']]
+#         print(temp)
+
+def create_new_event():
+    event_df=pd.read_csv("Data/event.csv")
+    event_line_item_df=pd.read_csv("Data/event_line_item.csv")
+    ref=db.collection('event')
+    for index, row in event_df.iterrows():
+        ans=row.to_dict()
+        temp=event_line_item_df[event_line_item_df['event_id']==row['event_id']]
+        team_lineitem={}
+        for i in temp['team_id'].unique():
+            # print(int(i),type(int(i)))
+            temp2=temp[temp['team_id']==i]
+            temp_lineitem=dict()
+            temp_lineitem['type_dance']=int(temp2['type_id'].unique()[0])
+            temp_lineitem['song_id']=int(temp2['song_id'].unique()[0])
+            temp_lineitem['member']=[int(i) for i in temp2['member_id'].unique()]
+            team_lineitem[str(int(i))]=temp_lineitem
+        ans['line_item']=team_lineitem
+        print(ans)
+        ref.document(str(row['event_id'])).set(ans)
     
 if __name__ == "__main__":
     # init('criteria')
@@ -73,3 +107,5 @@ if __name__ == "__main__":
     # init('song')
     # init('type_dance')
     # edit_member()
+    # edit_event_line_item()
+    # create_new_event()
