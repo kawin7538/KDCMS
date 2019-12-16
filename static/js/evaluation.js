@@ -25,13 +25,35 @@ $(document).on('click','a[id^=eva_detail]',function(){
     $("input[type=checkbox]").prop('checked',false);
     $("#eva_id_id").val($row.find('#eva_id').text());
     $("#eva_date").val($(this).text());
-    console.log('/evaluation/detail2/'+$('#eva_id_id').val());
+    var eva_id=$("#eva_id_id").val();
+    var token = $('[name=csrfmiddlewaretoken]').val();
+    // console.log('/evaluation/detail/'+$('#eva_id_id').val());
     $.ajax({
-        url: '/evaluation/detail/'+$('#eva_id_id').val(),
-        method: 'get',
+        url: '/evaluation/detail/',
+        method: 'post',
         dataType: 'json',
+        headers: {'X-CSRFToken':token},
+        data: 'pk='+$('#eva_id_id').val(),
         success: function(data){
             console.log(data);
+            $.each(data.member_lineitem,function(k,v){
+                if(v==1){
+                    console.log("input[type=checkbox][id="+k+"]")
+                    $("input[type=checkbox][id="+k+"]").prop('checked',true);
+                }
+            });
+            var ii=0;
+            $.each(data.score_lineitem,function(k,v){
+                if(ii==1){
+                    $("#criteria_add").click();
+                }
+                else{
+                    ii=1;
+                }
+                var lastRow=$("#criteria_score_table > tbody > tr:last")
+                lastRow.find("select").val(k);
+                lastRow.find("input").val(v);
+            });
         },
         error: function(jqXHR,exception){
             console.log(jqXHR,exception);

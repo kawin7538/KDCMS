@@ -34,7 +34,7 @@ urlpatterns = [
 
     path('evaluation/<pk1>/<pk2>',eva_view.index,name="evaluation"),
     path('evaluation/list/<pk1>/<pk2>',eva_view.evaluation_list.as_view(),name="evaluation_list"),
-    path('evaluation/detail2/<pk>',eva_view.evaluation_detail.as_view(),name="evaluation_detail"),
+    path('evaluation/detail/',eva_view.evaluation_detail.as_view(),name="evaluation_detail"),
     path('criteria/list',eva_view.criteria_list.as_view(),name='criteria_list'),
     path('evaluation/create',eva_view.evaluation_create.as_view(),name="evaluation_create"),
     path('evaluation/update',eva_view.evaluation_update.as_view(),name="evaluation_update"),

@@ -76,9 +76,11 @@ class evaluation_list(View):
         return JsonResponse(data)
 
 class evaluation_detail(View):
-    def get(self,request,pk):
+    def post(self,request):
         print("Hello")
-        docs = db.collection('evaluate').where('eva_id','==',int(pk)).stream()
+        request.POST=request.POST.copy()
+        eva_id=request.POST['pk']
+        docs = db.collection('evaluate').where('eva_id','==',int(eva_id)).stream()
         data=[i.to_dict() for i in docs][0]
         # data=dict()
         print(data)
