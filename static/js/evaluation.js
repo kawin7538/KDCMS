@@ -68,6 +68,35 @@ $(document).on('click','#evaFormReset',function(){
     $("input[type=checkbox]").prop('checked',false);
 });
 
+$(document).on('click','#evaDelBtn',function(){
+    if($('#eva_id_id').val()!="<new>"){
+        var token = $('[name=csrfmiddlewaretoken]').val();
+        $.ajax({
+            url: '/evaluation/delete/',
+            dataType: 'json',
+            type: 'post',
+            data: 'pk='+$('#eva_id_id').val(),
+            headers: { "X-CSRFToken": token },
+            success: function(data){
+                if (data.error) {
+                    console.log(data);
+                    alert(data.error);
+                } else {
+                    console.log(data);
+                    // console.log(data.Receipt);
+                    $('#eva_id_id').val(data.eva_id)
+                    alert('ลบสำเร็จ');
+                    $("#evaFormModal").modal('hide');
+                    list_rehearsal();
+                }
+            },
+            error: function(a,b){
+                console.log(a,b);
+            }
+        });
+    }
+});
+
 $(document).on('click','#evaFormSubmit',function(){
     var song_name = $('#eva_date').val().trim();
     if (song_name == '') {
@@ -122,7 +151,7 @@ $(document).on('click','#evaFormSubmit',function(){
     }
     else{
         $.ajax({
-            url: '../../evaluation/update',
+            url: '/evaluation/update',
             type: 'post',
             data: str+"&member_lineitem="+str2+"&score_lineitem="+str1,
             headers: { "X-CSRFToken": token },
@@ -244,7 +273,7 @@ function list_rehearsal(){
             $row= ``;
             data.list_evaluation.forEach(s => {
                 $row += `<tr>`;
-                $row += `<td rowspan=${Object.keys(s.criteria_score).length} id="eva_delete"><button id="eva_del_button${s.eva_id}" class="btn btn-danger">DELETE</button></td>`;
+                // $row += `<td rowspan=${Object.keys(s.criteria_score).length} id="eva_delete"><button id="eva_del_button${s.eva_id}" class="btn btn-danger">DELETE</button></td>`;
                 $row += `<td rowspan=${Object.keys(s.criteria_score).length} id="eva_id" style="display:none">${s.eva_id}</td>`
                 $row += `<td rowspan=${Object.keys(s.criteria_score).length}><a href="#" id="eva_detail${s.eva_id}">${s.eva_date}</td>`;
                 // row += `<td rowspan=${s.criteria.length}>${s.eva_date}</td>`;

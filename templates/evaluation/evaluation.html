@@ -60,7 +60,6 @@
                             <thead>
                                 {% csrf_token %}
                                 <tr>
-                                    <th scope="col"></th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Criteria</th>
                                     <th scope="col">Score</th>
@@ -171,6 +170,7 @@
                 <button id="criteria_add" class="btn btn-primary">Add evaluation Type</button>
                 </div>
                 <div class="modal-footer">
+                    <button id="evaDelBtn" class="btn btn-danger">DELETE</button>
                     <button id="evaFormSubmit" class="btn btn-primary">Save</button>
                     <button id="evaFormReset" class="btn btn-secondary">Reset</button>
                 </div>

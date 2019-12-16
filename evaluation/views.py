@@ -183,9 +183,31 @@ class evaluation_update(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class evaluation_delete(View):
-    def get(self,request,pk):
-        print("Hello")
+    def post(self,request):
+        request.POST=request.POST.copy()
+        # print(request.POST)
         data=dict()
-        eva_id=int(pk)
+        eva_id=int(request.POST['pk'])
         temp_eva_ref=db.collection('evaluate').where('eva_id','==',eva_id)
         temp_eva_data=[i.to_dict() for i in temp_eva_ref.stream()][0]
+        # member_ref=db.collection('member').where('member_id','in',[int(i) for i in temp_eva_data['member_lineitem'].keys()])
+        # member_data=[(i.to_dict())['member_id'] for i in member_ref.stream()]
+        for k,v in temp_eva_data['member_lineitem'].items():
+            temp={}
+            member_ref=db.collection('member').where('member_id','==',int(k))
+            member_data=[i.to_dict() for i in member_ref.stream()][0]
+            member_doc_id=[i.id for i in member_ref.stream()][0]
+            if v==1:
+                temp['sum_rehearsal']=member_data['sum_rehearsal']-1
+            temp['count_rehearsal']=member_data['count_rehearsal']-1
+            db.collection('member').document(member_doc_id).update(temp)
+            # for doc in member_ref.stream():
+                # doc.update(temp)
+                # member_ref.document(doc.id).update(temp)
+
+        for doc in temp_eva_ref.stream():
+            doc.reference.delete()
+            
+        # print(temp_eva_data)
+        # print(member_data)
+        return JsonResponse(data)
