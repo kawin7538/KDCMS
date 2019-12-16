@@ -52,3 +52,4 @@ class event_detail(View):
         # data['lineitem']=temp_song
         data=event
         return JsonResponse(data)
+

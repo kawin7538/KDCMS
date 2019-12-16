@@ -12,7 +12,7 @@
                 <!-- <th scope="col">#</th> -->
                 <th scope="col">Date/Time</th>
                 <th scope="col">Event Name</th>
-                <!-- <th scope="col">Location</th> -->
+                <th scope="col">Eva</th>
                 <th scope="col"></th>
             </tr>
         </thead>
@@ -37,9 +37,16 @@
                     <form id="eventForm" method="post"> 
                         {% csrf_token %}
                     <div class="form-group row">
+                        <label for="event_id" class="col-lg-3 col-form-label">Event ID</label>
+                        <div class="col-lg-9">
+                            <input type="text" name="event_name" class="form-control" id="event_id" placeholder="Event ID Here" readonly>
+                        </div>
+                        <div class="invalid-feedback">Example invalid feedback text</div>
+                    </div>
+                    <div class="form-group row">
                         <label for="event_name" class="col-lg-3 col-form-label">Event Name</label>
                         <div class="col-lg-9">
-                            <input type="text" name="event_name" class="form-control" id="event_name" placeholder="Event Name Here" readonly>
+                            <input type="text" name="event_name" class="form-control" id="event_name" placeholder="Event Name Here">
                         </div>
                         <div class="invalid-feedback">Example invalid feedback text</div>
                     </div>
@@ -59,8 +66,10 @@
                         <table class="table table-border" id="member_check_table">
                             <thead>
                                 <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Song</th>
                                     <th scope="col">Member</th>
-                                    <th scope="col">Has come</th>
                                 </tr>
                             </thead>
                             <tbody>
