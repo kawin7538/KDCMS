@@ -1,84 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table, th, td {
-  border: 2px solid black;
-  border-collapse: collapse;
-  }
-  th, td {
-  padding: 5px;
-}
-th {
-  text-align: left;
-}
-</style>
-</head>
-<body>
-<h1>Event</h1>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=2.0">
-    <title>Home page</title>
-
-<body>
-<div>
-<table style="width:50%" border="1" >
-        <tr>
-        <th>
- Event Form
- 	</th>
-        </tr>
-	<tr><th>
-            <label for="event_name">Event Name:</label>
-            <input type="text" id="event_name" name="event_name">
-<br><br>
-	    <label for="location">Location:</label>
-            <input type="text" id="location" name="location">
-</br><br>
-
-            <label for="date_time">Date/Time:</label>
-            <input type="text" id="date_time" name="date_time">
-</br>
-	</th></tr>
+<div class="container">
+    <br>
+    <div class="row">
+        <!-- <button class="btn btn-primary">Add</button> -->
+        <div class="col-lg-10"><h5>Event Part</h5></div>
+        <div class="col-lg-2"><button id="add_event" class="btn btn-primary btn-block" data-toggle="modal" data-target="#eventFormModal"><i class="fas fa-plus"></i> Add Event</button></div>
+    </div>
+    <br>
+    <table class="table" id="event_table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"></th>
+                <th scope="col">Date/Time</th>
+                <th scope="col">Event Name</th>
+                <th scope="col">Location</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
+<!-- Hyperlink -->
+<div class="hyperlink" id="eventHyperlink" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="hyperlink-dialog hyperlink-dialog-centered" role="document">
+        <div class="hyperlink-content">
+            <div class="hiperlink-body">
+                <button type="button" class="close" data-dismiss="hyperlink" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <div class="embed-responsive embed-responsive-16by9" id="event_id"></div>
+            </div>
         </div>
-        </td>
-   <tr>
-        <td>
-        <table style="height:100%" border="1">
-        <td>
-        <label for="id">#</label>
-        </td>
-        
-        <td>
-        <div>
-            <label for="Type">Type</label>
-            <input type="text" id="Type" name="Type">
+    </div>
+</div>
+
+<!-- Event Form -->
+<div class="hyperlink" id="eventFormHyperlink" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="hyperlink-dialog" role="document">
+        <div class="hyperlink-content">
+                <!-- <form id="eventForm" method="post" class="was-validated">  -->
+                <div class="hyperlink-header">
+                    <h5 class="hyperlink-title">Event Form</h5>
+                    <button type="button" class="close" data-dismiss="hyperlink" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="hyperlink-body">
+                    <form id="eventForm" method="post"> 
+                        {% csrf_token %}
+                    <div class="form-group row">
+                        <label for="event_name" class="col-lg-3 col-form-label">Event Name</label>
+                        <div class="col-lg-9">
+                            <input type="text" name="event_name" class="form-control" id="event_name" placeholder="Event Name Here" readonly>
+                        </div>
+                        <div class="invalid-feedback">Example invalid feedback text</div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="location" class="col-lg-3 col-form-label">Location</label>
+                        <div class="col-lg-9">
+                            <input type="text" name="location" class="form-control" id="location" placeholder="Location Here" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="date_time" class="col-lg-3 col-form-label">Date/Time</label>
+                        <div class="col-lg-9">
+                            <input type="text" name="date_time" class="form-control" id="date_time" placeholder="Date Time Here">
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <div class="modal-footer">
+                    <button id="songFormSubmit" class="btn btn-primary">Save</button>
+                    <button id="songFormReset" class="btn btn-secondary">Reset</button>
+                </div>
         </div>
-        </td>
-        
-        
-        <td>
-         
-        <div>
-            <label for="Song">Song</label>
-            <input type="text" id="Song" name="Song">
-        </div>
-        </td>
-        
-        
-        <td>
-        <div>
-            <label for="Member">Member</label>
-            <input type="text" id="Member" name="Member">
-	
-       </div>
-            </td>
-            <td>
-        <div>
-            <label for="score">Score</label>
-            <input type="text" id="Member" name="Member">
-	
-       </div>
-            </td>
-	<tr>
+    </div>
+</div>
+
+
+
