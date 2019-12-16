@@ -25,9 +25,9 @@ $(document).on('click','a[id^=eva_detail]',function(){
     $("input[type=checkbox]").prop('checked',false);
     $("#eva_id_id").val($row.find('#eva_id').text());
     $("#eva_date").val($(this).text());
-    console.log('../../evaluation/detail/'+$('#eva_id_id').val());
+    console.log('/evaluation/detail2/'+$('#eva_id_id').val());
     $.ajax({
-        url: '../../evaluation/detail/'+$('#eva_id_id').val(),
+        url: '/evaluation/detail/'+$('#eva_id_id').val(),
         method: 'get',
         dataType: 'json',
         success: function(data){
@@ -38,6 +38,25 @@ $(document).on('click','a[id^=eva_detail]',function(){
         }
     });
 });
+
+$(document).on('click','button[id^=eva_del_button]',function(){
+    var row = $(this).closest('tr');
+    var eva_id=row.find("#eva_id").html();
+    var token = $('[name=csrfmiddlewaretoken]').val();
+    console.log(eva_id);
+    $.ajax({
+        url: '/evaluation/delete/'+eva_id,
+        dataType: 'json',
+        type: 'post',
+        headers: {'X-CSRFToken':token},
+        success: function(data){
+            console.log(data);
+        },
+        error: function(a,b){
+            console.log(a,b);
+        }
+    });
+})
 
 $(document).on('click','#evaFormReset',function(){
     $("#eva_id_id").val('<new>');
@@ -79,26 +98,50 @@ $(document).on('click','#evaFormSubmit',function(){
     var str2=member_table_toJson();
     // console.log(str2);
     var token = $('[name=csrfmiddlewaretoken]').val();
-    $.ajax({
-        url: '../../evaluation/create',
-        type: 'post',
-        data: str+"&member_lineitem="+str2+"&score_lineitem="+str1,
-        headers: { "X-CSRFToken": token },
-        dataType:  'json',
-        success: function(data){
-            if (data.error) {
-                console.log(data);
-                alert(data.error);
-            } else {
-                console.log(data);
-                // console.log(data.Receipt);
-                $('#eva_id_id').val(data.eva_id)
-                alert('บันทึกสำเร็จ');
-                $("#evaFormModal").modal('hide');
-                list_rehearsal();
+    if($('#eva_id_id').val()=="<new>"){
+        $.ajax({
+            url: '../../evaluation/create',
+            type: 'post',
+            data: str+"&member_lineitem="+str2+"&score_lineitem="+str1,
+            headers: { "X-CSRFToken": token },
+            dataType:  'json',
+            success: function(data){
+                if (data.error) {
+                    console.log(data);
+                    alert(data.error);
+                } else {
+                    console.log(data);
+                    // console.log(data.Receipt);
+                    $('#eva_id_id').val(data.eva_id)
+                    alert('บันทึกสำเร็จ');
+                    $("#evaFormModal").modal('hide');
+                    list_rehearsal();
+                }
             }
-        }
-    });
+        });
+    }
+    else{
+        $.ajax({
+            url: '../../evaluation/update',
+            type: 'post',
+            data: str+"&member_lineitem="+str2+"&score_lineitem="+str1,
+            headers: { "X-CSRFToken": token },
+            dataType:  'json',
+            success: function(data){
+                if (data.error) {
+                    console.log(data);
+                    alert(data.error);
+                } else {
+                    console.log(data);
+                    // console.log(data.Receipt);
+                    $('#eva_id_id').val(data.eva_id)
+                    alert('บันทึกสำเร็จ');
+                    $("#evaFormModal").modal('hide');
+                    list_rehearsal();
+                }
+            }
+        });
+    }
 });
 
 $(document).on('click','#criteria_add',function(){
@@ -201,6 +244,7 @@ function list_rehearsal(){
             $row= ``;
             data.list_evaluation.forEach(s => {
                 $row += `<tr>`;
+                $row += `<td rowspan=${Object.keys(s.criteria_score).length} id="eva_delete"><button id="eva_del_button${s.eva_id}" class="btn btn-danger">DELETE</button></td>`;
                 $row += `<td rowspan=${Object.keys(s.criteria_score).length} id="eva_id" style="display:none">${s.eva_id}</td>`
                 $row += `<td rowspan=${Object.keys(s.criteria_score).length}><a href="#" id="eva_detail${s.eva_id}">${s.eva_date}</td>`;
                 // row += `<td rowspan=${s.criteria.length}>${s.eva_date}</td>`;

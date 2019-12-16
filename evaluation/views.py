@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.http import JsonResponse
 
-from dbHelper import firestore,db, evaluate_ref
+from dbHelper import firestore,db
 
 import collections, functools, operator 
 
@@ -101,7 +101,7 @@ class evaluation_create(View):
         data=dict()
         request.POST=request.POST.copy()
         # print(request.POST)
-        query=evaluate_ref.order_by('eva_id',direction=firestore.Query.DESCENDING).limit(1)
+        query=db.collection('evaluate').order_by('eva_id',direction=firestore.Query.DESCENDING).limit(1)
         max_num=[i.to_dict() for i in query.stream()][0]['eva_id']
         request.POST['eva_id']=(max_num+1)
         data=request.POST
@@ -138,3 +138,54 @@ class evaluation_create(View):
         db.collection('evaluate').add(data)
 
         return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class evaluation_update(View):
+    def post(self,request):
+        data=dict()
+        request.POST=request.POST.copy()
+        data=request.POST
+        del data['csrfmiddlewaretoken']
+        data['member_lineitem']=eval(data['member_lineitem'])['member_lineitem']
+        eva_data=[i.to_dict() for i in db.collection('evaluate').where('eva_id','==',int(data['eva_id'])).stream()][0]
+        doc_ans_id=[i.id for i in db.collection('evaluate').where('eva_id','==',int(data['eva_id'])).stream()][0]
+        data['event_id']=int(data['event_id'])
+        data['team_id']=int(data['team_id'])
+        data['eva_id']=int(data['eva_id'])
+        print(eva_data)
+        temp={}
+        for d in data['member_lineitem']:
+            for k,v in d.items():
+                temp[k]=v
+                member_ref=db.collection('member').where('member_id','==',int(k))
+                data_member=dict()
+                doc_id=""
+                for doc in member_ref.stream():
+                    data_member=doc.to_dict()
+                    doc_id=doc.id
+                    if v>eva_data['member_lineitem'][k]:
+                        data_member['sum_rehearsal']+=1
+                    elif v<eva_data['member_lineitem'][k]:
+                        data_member['sum_rehearsal']-=1
+                    # data_member['count_rehearsal']+=1
+                db.collection('member').document(doc_id).update(data_member)
+        data['member_lineitem']=temp
+        data['score_lineitem']=eval(data['score_lineitem'])['score_lineitem']
+        temp={}
+        for d in data['score_lineitem']:
+            for k,v in d.items():
+                temp[k]=int(v)
+        data['score_lineitem']=temp
+        data['mean_score']=sum(list(data['score_lineitem'].values()))/len(list(data['score_lineitem'].values()))
+        db.collection('evaluate').document(doc_ans_id).update(data)
+
+        return JsonResponse(data)
+
+@method_decorator(csrf_exempt, name='dispatch')
+class evaluation_delete(View):
+    def get(self,request,pk):
+        print("Hello")
+        data=dict()
+        eva_id=int(pk)
+        temp_eva_ref=db.collection('evaluate').where('eva_id','==',eva_id)
+        temp_eva_data=[i.to_dict() for i in temp_eva_ref.stream()][0]

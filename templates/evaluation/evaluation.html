@@ -58,7 +58,9 @@
                     <div class="row">
                         <table class="table" id="eva_score">
                             <thead>
+                                {% csrf_token %}
                                 <tr>
+                                    <th scope="col"></th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Criteria</th>
                                     <th scope="col">Score</th>
