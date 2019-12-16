@@ -53,3 +53,11 @@ class event_detail(View):
         data=event
         return JsonResponse(data)
 
+class type_dance_list(View):
+    def get(self,request):
+        data=dict()
+        td_ref=db.collection('type_dance')
+        td_data=[i.to_dict() for i in td_ref.stream()]
+        # print(td_data)
+        data['type_dance']=td_data
+        return JsonResponse(data)

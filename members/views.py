@@ -26,7 +26,7 @@ class member_list(View):
         for doc in docs:
             temp=doc.to_dict()
             temp['name']=temp['firstname']+" "+temp['lastname']
-            del temp['firstname'], temp['lastname']
+            del temp['firstname']
             member.append(temp)
         print("{} member loaded".format(len(member)))
         data['member']=member

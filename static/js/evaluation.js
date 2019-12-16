@@ -233,7 +233,7 @@ function member_table_toJson(){
 function add_cri_row(condition){
     if($criteria==null){
         $.ajax({
-            url: '../../criteria/list',
+            url: '/criteria/list',
             type: 'get',
             dataType: 'json',
             success: function(data){

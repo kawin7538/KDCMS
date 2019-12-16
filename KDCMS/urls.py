@@ -35,6 +35,7 @@ urlpatterns = [
 
     path('event/list',event_view.event_list.as_view(),name='event_list'),
     path('event/detail/<pk>',event_view.event_detail.as_view(),name="event_detail"),
+    path('type_dance/list',event_view.type_dance_list.as_view(),name='type_dance_list'),
 
     path('evaluation/<pk1>/<pk2>',eva_view.index,name="evaluation"),
     path('evaluation/list/<pk1>/<pk2>',eva_view.evaluation_list.as_view(),name="evaluation_list"),
