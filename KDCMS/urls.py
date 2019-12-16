@@ -18,6 +18,7 @@ from django.urls import path
 
 from songs import views as song_view
 from members import views as member_view
+from evaluation import views as eva_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +27,14 @@ urlpatterns = [
     path('song/create',song_view.song_create.as_view(),name='song_create'),
     path('song/update',song_view.song_update.as_view(),name='song_update'),
     path('song/delete/<pk>',song_view.song_delete.as_view(),name='song_delete'),
+    
     path('member/list',member_view.member_list.as_view(),name='member_list'),
     path('member/<pk>',member_view.index,name='member'),
     path('member/detail/<pk>',member_view.member_detail.as_view(),name='member_detail'),
+
+    path('evaluation/<pk1>/<pk2>',eva_view.index,name="evaluation"),
+    path('evaluation/list/<pk1>/<pk2>',eva_view.evaluation_list.as_view(),name="evaluation_list"),
+    path('evaluation/detail/<pk>',eva_view.evaluation_detail.as_view(),name="evaluation_detail"),
+    path('criteria/list',eva_view.criteria_list.as_view(),name='criteria_list'),
+    path('evaluation/create',eva_view.evaluation_create.as_view(),name="evaluation_create"),
 ]
