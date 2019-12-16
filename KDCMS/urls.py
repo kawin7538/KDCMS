@@ -18,6 +18,7 @@ from django.urls import path
 
 from songs import views as song_view
 from members import views as member_view
+from events import views as event_view
 from evaluation import views as eva_view
 
 urlpatterns = [
@@ -31,6 +32,9 @@ urlpatterns = [
     path('member/list',member_view.member_list.as_view(),name='member_list'),
     path('member/<pk>',member_view.index,name='member'),
     path('member/detail/<pk>',member_view.member_detail.as_view(),name='member_detail'),
+
+    path('event/list',event_view.event_list.as_view(),name='event_list'),
+    path('event/detail/<pk>',event_view.event_detail.as_view(),name="event_detail"),
 
     path('evaluation/<pk1>/<pk2>',eva_view.index,name="evaluation"),
     path('evaluation/list/<pk1>/<pk2>',eva_view.evaluation_list.as_view(),name="evaluation_list"),
