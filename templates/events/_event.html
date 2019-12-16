@@ -9,8 +9,7 @@
     <table class="table" id="event_table">
         <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col"></th>
+                <!-- <th scope="col">#</th> -->
                 <th scope="col">Date/Time</th>
                 <th scope="col">Event Name</th>
                 <th scope="col">Location</th>
@@ -22,32 +21,32 @@
         </tbody>
     </table>
 </div>
-<!-- Hyperlink -->
-<div class="hyperlink" id="eventHyperlink" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="hyperlink-dialog hyperlink-dialog-centered" role="document">
-        <div class="hyperlink-content">
+<!-- modal
+<div class="modal" id="eventmodal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
             <div class="hiperlink-body">
-                <button type="button" class="close" data-dismiss="hyperlink" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <div class="embed-responsive embed-responsive-16by9" id="event_id"></div>
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- Event Form -->
-<div class="hyperlink" id="eventFormHyperlink" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="hyperlink-dialog" role="document">
-        <div class="hyperlink-content">
+<div class="modal" id="eventFormmodal" data-backdrop="static" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
                 <!-- <form id="eventForm" method="post" class="was-validated">  -->
-                <div class="hyperlink-header">
-                    <h5 class="hyperlink-title">Event Form</h5>
-                    <button type="button" class="close" data-dismiss="hyperlink" aria-label="Close">
+                <div class="modal-header">
+                    <h5 class="modal-title">Event Form</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="hyperlink-body">
+                <div class="modal-body">
                     <form id="eventForm" method="post"> 
                         {% csrf_token %}
                     <div class="form-group row">
