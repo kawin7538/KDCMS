@@ -1,6 +1,12 @@
 $(document).ready(function(){
     
     listMember();
+    $("#myInput2").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTableBody2 tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
 });
 
 $(document).on('click','a[id^=member_detail]',function(){

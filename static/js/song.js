@@ -1,6 +1,12 @@
 $(document).ready(function(){
     var $videoSrc;
     listSong();
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTableBody tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
 });
 
 $(document).on('click','button[id^=yt_button]',function(){
