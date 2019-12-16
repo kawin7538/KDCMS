@@ -164,5 +164,10 @@ $(document).on('click',"#memberFormSubmit",function(e){
     
 })
 
-
-    
+ let rows
+if (req.query.calss){
+    rows = await db('member').where('member_id','=',req.qeury.member_id)
+}
+else {
+    rows=await db('member')
+}
