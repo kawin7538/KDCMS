@@ -64,6 +64,15 @@ function listMember(){
                 i++;
             });
             $("#member_table > tbody").html(row);
+            $("#all_member").html(i);
+            $.ajax({
+                url: '/event/per/person',
+                type: 'get',
+                dataType: 'json',
+                success: function(data){
+                    $("#event_per_person").html(data.mean.toFixed(2));
+                },
+            });
         }
     });
 }

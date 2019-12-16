@@ -53,3 +53,22 @@ class member_detail(View):
         data['list_event']=list_event
         # print(data)
         return JsonResponse(data)
+
+class event_per_person(View):
+    def get(self,request):
+        data=dict()
+        member_ref=db.collection('member')
+        num_member=len([i for i in member_ref.stream()])
+        event_ref=db.collection('event')
+        int_sum=0
+        for doc in event_ref.stream():
+            temp=list()
+            temp_dict=doc.to_dict()
+            print(temp_dict)
+            for k,v in temp_dict['line_item'].items():
+                temp.extend(v['member'])
+            temp=list(set(temp))
+            int_sum+=len(temp)
+        print(num_member,int_sum)
+        data['mean']=int_sum/num_member
+        return JsonResponse(data)

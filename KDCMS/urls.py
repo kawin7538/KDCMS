@@ -32,6 +32,7 @@ urlpatterns = [
     path('member/list',member_view.member_list.as_view(),name='member_list'),
     path('member/<pk>',member_view.index,name='member'),
     path('member/detail/<pk>',member_view.member_detail.as_view(),name='member_detail'),
+    path('event/per/person',member_view.event_per_person.as_view(),name="event_per_person"),
 
     path('event/list',event_view.event_list.as_view(),name='event_list'),
     path('event/detail/<pk>',event_view.event_detail.as_view(),name="event_detail"),
