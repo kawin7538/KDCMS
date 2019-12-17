@@ -249,7 +249,7 @@ function add_member_row(condition){
     if(condition==false){
         code=``;
         code +=`<td><table id="member_choice_table"><theader><tr><td><button class="btn btn-primary">Add Member</button></td></tr></theader><tbody><tr>`;
-        code += `<td><select id="member_choice" required class="form-control">`;
+        code += `<td><select choice="member_choice" required class="form-control">`;
         code += `<option value="" disabled="disabled" selected>select</option>`
         $.each($member,function(i,s){
             code += `<option value=${s.member_id}>${s.nickname}</option>`;
